@@ -1,0 +1,22 @@
+---
+author: "Ralph Trane"
+title: "771 Project Description"
+output: pdf_document
+---
+
+## Background
+The posterior probability distribution on a set of phylogenetic trees is a well-defined mathematical object, if we are given a likelihood model, prior distribution, and data. However, it is difficult to use in partice.
+
+Using MCMC methods, we can create samples of trees drawn from the posterior distribution, and base inferences on these posterior samples. Posterior distributions of phylogenetic trees typically are estimated with simple sample relative frequencies.
+
+A problem with this approach arise when the tree space is large. Since we sample using MCMC, there'll be many trees that do not get sampled, and a proportion of these will be trees with non-zero probabilities might not be sampled. The probability of these trees would be estimated to be $0$.
+
+Although the error in estimated probabilities might be low, some methods are sensitive to this. For example, in Bayesian concordance analysis (BCA), the first step of an analysis is to calculate separately the posterior probabilities of trees for each of many genes (Ane et al. 2007). If a tree is very probable in several distributions based on single genes, but is unsampled in the distribution of another given gene, the simple estimate of zero for the posterior probability of the tree for the given gene can bias the results in the second stage of the BCA analysis. What is needed to correct this shortcoming is a means to estimate the posterior probabilities of trees that do not appear in samples, but might be relatively probable because they contain clades that are probable.
+
+To do so, Larget (2013) proposes to use conditional clade probabilities instead. It is argued that subclades can be considered conditionally independent, which drastically simplifies calculations. Full tree probabilities can then be calculated using these conditional clade probabilities.
+
+With this in mind, Larget suggests to take a step back. Using MCMC to get a sample of trees works well, but slow. Now that we've found out that do not need to estimate tree probabilities from sample frequencies, but "simply" need good estimates of conditional clade probabilities, maybe a faster bootstrap sample of trees would be sufficient.
+
+
+## What has been done
+Larget has already worked on this approach, and found that it works really well. 

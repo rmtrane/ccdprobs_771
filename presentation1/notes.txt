@@ -1,0 +1,27 @@
+Phylogenetic Trees -- can we bootstrap?
+
+Phylogenetics: the study of the evolutionary history and relationships among individuals or groups of organisms (e.g. species, or populations)
+
+We're interested in somehow connecting species through a tree structure that specifies the lineage. So the scenario is that give a number of aligned DNA sequences, we want to specify a tree. One example is this data set consisting of 12 taxa (=species), different feline and canine species (i.e. cats and dogs). For each specie, we have an aligned DNA sequence. Now, how are these species related? 
+
+I've listed a few of the reasons why we would care about this. It could be to conserve diversity of plant communities; find a new natural product that is similar to one we have, but without some nasty side effects; could be to find new species; even has applications in forensics sciences. So there are plenty of reasons why it would be relevant to look at these tree structures.
+
+The way we go about these sorts of analyses is the following: first we fit a model to the data. This model specifies how a species will evolve over times. The idea is fairly simple: each of the bases can go from one state to another (ACGT -> ACGT) with a certain probability. How often a change happens is modeled as a waiting time. Once we have fitted a model, we go ahead and sample from the posterior distribution; this is usually done using a MCMC process. This results in a large sample of trees from the posterior distribution. These are often represented using the most probable tree (i.e. the one sampled most often) which is annotated with probabilities of the clades (i.e. how often each clade was seen across all the samples).
+
+This is what the result looks like for our cats and dogs. Each number indicates how often the subclade was present in the samples. For example, the subclade with leopard, snow_leopard, and tiger was present in 65% of the sample, while the subclade with cat and cheetah was present in 76% of the samples.
+
+Okay, so we've seen that there's a problem that is interesting to solve for different reasons... and then I showed you that it can be solved. So... what am I doing here? 
+
+Well, there are two problems here:
+
+1) the sample space is rather large. With only 12 taxa, there are more than 650 million possible trees. To get a reasonable sample, we need to let the MCMC run for many, many generations. And when researchers are looking at problems with >60 different taxa, this only gets worse.
+
+2) When performing inference, we often want a good estimate of the posterior tree/subclade probabilities. When using simple relative frequencies, many trees/subclades not seen will have estimated probabilities of 0, even though they might be as likely as many tree/subclades that were sampled. 
+
+The second problem can to some extend be solved using Conditional Clade Probabilities. The idea here is okay simple: given a split, the evolution in the two subclades are approximately independent, so we can use bases and conditional independence to calculate probabilities of a tree from conditional probabilities of clades. So take a look at the sample we got from our MCMC, look at a pair of subclades, and count how often this split occurs given that the clade is present. The probability of a tree is now "simply" the product of all conditional probabilities of subclades given the parent clade. One upside of this is that we can now calculate the probabilities of all trees constructed from subclades which we have observed -- even if we never saw the entire tree in our sample. 
+
+But wait a minute... now that we don't need to observe a tree to be able to calculate its probability, maybe we can do something better than MCMC (in terms of computational complexity, that is)? Maybe we can bootstrap to get a sample of trees. The bootstrap method is not good enough for getting a good estimate of the distribution of trees, but maybe we can get a good enough estimate of the conditional distributions of conditional clades? This approach is faster than doing MCMC, but as mentioned not as accurate in terms of the trees we get out. So, why bother? Because it works... sometimes. Professor Larget who I'm working with has looked at some data and tried this approach, and found that sometimes it actually works... but sometimes it doesn't. The question then is: when and why does it (not) work?
+
+So far, I've spend a lot of time getting familiar with terminology, concepts, etc of phylogenetic trees. Learned how to use tools such as MrBayes (MCMC method), Bistro (bootstrap method), ccdprobs (summarizing sample in terms of conditional probabilities). Played around with Julia, and how to import trees there. 
+
+The plan is to simulate data in Julia, use the bootstrap and MCMC approaches to get samples, and then estimate conditional clade probabilities. Then compare, and find a pattern -- when do they agree, when do the not agree. 

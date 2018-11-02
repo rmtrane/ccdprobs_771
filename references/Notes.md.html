@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h2 id="larget-2013">Larget, 2013</h2>
+<h3 id="introduction">Introduction</h3>
+<p>The posterior probability distribution on a set of phylogenetic trees is a well-defined mathematical object, if we are given a likelihood model, prior distribution, and data. However, it is difficult to use in partice.</p>
+<p>Using MCMC methods, we can create samples of trees drawn from the posterior distribution, and base inferences on these posterior samples. Posterior distributions of phylogenetic trees typically are estimated with simple sample relative frequencies.</p>
+<p>Large tree space <span class="math"> ⇒ </span> many trees not sampled. Even trees with non-zero probabilities might not be sampled. The probability of trees not sampled would be estimated to be <span class="math">0</span>. Inference based on a smaller tree space.</p>
+<p>A posterior sample is summarized using a single consensus tree. Each edge is annotated with the probability that the corresponding clade is a monophyletic group relative to other taxa in the tree. (??) In some applications, the full probability distribution over the set of possible trees is required, or at least an accuracte approximation of this.</p>
+<p>For example, in Bayesian concordance analysis (BCA), the first step of an analysis is to calculate separately the posterior probabilities of trees for each of many genes (Ané et al. 2007). If a tree is very probable in several distributions based on single genes, but is unsampled in the distribution of another given gene, the simple estimate of zero for the posterior probability of the tree for the given gene can bias the results in the second stage of the BCA analysis. What is needed to correct this shortcoming is a means to estimate the posterior probabilities of trees that do not appear in samples, but might be relatively probable because they contain clades that are probable.</p>
+<p><em>Conditional clade probability distributions</em> (CCDs) determine a probability distribution on trees that is an accurate estimate of the true posterior distribution, and can be applied to measure the posterior probability of any tree, whether or not it was sampled in the posterior sample.</p>
+<h3 id="motivating-example">Motivating Example</h3>
+<p>Q: Can we use clade probabilities to estimate tree probabilities?</p>
+<p>If a tree <span class="math"><em>T</em><sub>1</sub></span> is made up of clades <span class="math"><em>C</em><sub>2</sub>, …, <em>C</em><sub>11</sub></span>, then <span class="math"><em>P</em>(<em>T</em><sub>1</sub>) = <em>P</em>(<em>C</em><sub>2</sub> ∩ … ∩ <em>C</em><sub>11</sub>)</span>. If all clades we're independent, RHS equal to product. However, this is not generally the case. But we could hypothesize that clades in separate regions of the tree may be approximately independent. Or at least approximately conditionally independent. I.e. given a certain split, the two subclades might be independent.</p>
+<p>To use this method, we need more details about the tree sample than the clade proportions. For example, to estimate <span class="math"><em>P</em>(<em>C</em><sub>6</sub>∣<em>C</em><sub>5</sub>) = <em>P</em>(<em>C</em><sub>5</sub> ∩ <em>C</em><sub>6</sub>)/<em>P</em>(<em>C</em><sub>5</sub>)</span>, we need to compute proportions of trees that include <span class="math"><em>C</em><sub>5</sub></span>, and proportions of trees that include <span class="math"><em>C</em><sub>5</sub></span> and <span class="math"><em>C</em><sub>6</sub></span>.</p>
+<h3 id="methods">Methods</h3>
+<p>If including single taxa notes (using that <span class="math"><em>P</em>(<em>C</em><sub><em>i</em></sub> ∩ <em>C</em><sub><em>j</em></sub>∣<em>C</em>) = 1</span> if <span class="math"><em>C</em></span> is a clade consisting of only <span class="math"><em>C</em><sub><em>i</em></sub></span> and <span class="math"><em>C</em><sub><em>j</em></sub></span>), one can write the probability of a tree <span class="math"><em>T</em></span> as</p>
+<p><br /><span class="math"><em>P</em>(<em>T</em>) = ∏<sub><em>C</em> ∈ all caldes of T, ∣<em>C</em>∣ &gt; 1</sub><em>P</em>(<em>L</em>(<em>C</em>, <em>T</em>) ∩ <em>R</em>(<em>C</em>, <em>T</em>)∣<em>C</em>).</span><br /></p>
+<p>Here, <span class="math"><em>L</em>(<em>C</em>, <em>T</em>)</span> and <span class="math"><em>R</em>(<em>C</em>, <em>T</em>)</span> are the two subclades of <span class="math"><em>C</em></span> in the tree <span class="math"><em>T</em></span>.</p>
+<h3 id="computational-algorithm-utilizing-ccds.">Computational algorithm utilizing CCDs.</h3>
+<h3 id="validation-i.e.-why-we-care">Validation; i.e. why we care</h3>
+<p>CCD method based on the theoretical assumption of approximate conditional independence of separated subtrees is accurate on a single sample from a single data set. For additional evidence, Larget examine its behavior with repeated samples on the Carnivora data set, on a sample from a uniform distribution over tree space where exact calculations are possible, and for multiple other real data sets.</p>
+<h4 id="additional-data-sets">Additional data sets</h4>
+<ul>
+<li>When coverage drops, correlation between CCD and SRF drops.
+<ul>
+<li>Seems reasonable. With less of the tree space sampled, SRF estimates are &quot;artificially higher&quot;. CCD does not suffer from this in the same way.</li>
+</ul></li>
+</ul>
+<h3 id="discussion">Discussion</h3>
+<p>CCD provides additional accuracy when a smaller proportion of the sample space is sampled. This extra accuracy is important if performing analyses such as BCA (Bayesian Concordance Analysis)</p>
+<h2 id="importance-sampling">Importance sampling</h2>
+<h3 id="in-this-particular-situation">In this particular situation</h3>
+<ul>
+<li>use MrBayes to estimate conditional clade distributions.</li>
+<li>use these to estimate tree probabilities</li>
+<li>sample trees using these estimates</li>
+</ul>
+<h3 id="in-general">In general</h3>
+<p>Assume we want to calculate the integral <span class="math"><em>I</em> = ∫<em>h</em>(<em>y</em>)<em>d</em><em>y</em></span>. If <span class="math"><em>f</em></span> is a probability density function of a random variable <span class="math"><em>Y</em></span>, then <span class="math">$I = \int \frac{h(y)}{f(y)} f(y) dy = E_f(\tfrac{h(y)}{f(y)})$</span>. Using Monte Carlo integration, we would sample <span class="math"><em>N</em></span> samples from the density <span class="math"><em>f</em></span> and then estimate the expectation as <span class="math">$\frac{1}{N} \sum_{i=1}^N \tfrac{h(y)}{f(y)}$</span>, which in turn is also an estimator of <span class="math"><em>I</em></span>. Law of Large Numbers ensures us that this estimator converges to the desired expectation.</p>
+<p>This works well... if we can sample from the density <span class="math"><em>f</em></span>. But what if we can't? Then, rather than sampling from <span class="math"><em>f</em></span> we sample from a different probability distribution <span class="math"><em>g</em></span>. We then estimate I by observing that</p>
+<p><br /><span class="math">$$I = \int h(y) f(y)dy = \int h(y) \frac{f(y)}{g(y)} g(y)dy = \int \frac{h(y)f(y)}{g(y)} g(y) dy = E\left[\frac{h(Y)f(Y)}{g(Y)}\right].$$</span><br /></p>
+<p>So drawing <span class="math"><em>N</em></span> samples, <span class="math"><em>Y</em><sub>1</sub>, …, <em>Y</em><sub><em>N</em></sub></span>, from <span class="math"><em>g</em></span>, <span class="math">$\hat{I} = \frac{1}{N}\sum_{i=1}^N \frac{h(Y_i)f(Y_i)}{g(Y_i)}$</span>, which converges to <span class="math">$E_g\left[\frac{h(Y)f(Y)}{g(Y)}\right] = I$</span>.</p>
+<h3 id="what-i-should-do">What I should (?) do</h3>
+<ul>
+<li>given MrBayes samples, estimate conditional clade distributions</li>
+<li>sample trees</li>
+</ul>
+<p>Implement in Julia.</p>
+<h2 id="ccdprobs">ccdprobs</h2>
+<p>Inputs: summary of MrBayes .t file produced with BUCKy. This</p>
+<p>Output: for each input tree, the estimated tree probability based on the conditional clade probability distribution.</p>
+<h2 id="overall-summary-of-problem">Overall summary of problem</h2>
+<p>We're given a data set consisting of aligned DNA. We aim at estimating the posterior probability of trees.</p>
+<ul>
+<li>MrBayes gives us a sample of trees (created somehow using MCMC).</li>
+<li>The posterior probability of a given tree can then be found using SRF (simple relative frequencies) or CCD (conditional clade probability distribution).</li>
+<li>The argument is that SRF gives unreliable estimates of the probability of trees that appear once in the sample, or not at all (these will be <span class="math">0</span>). CCD gives more realistic estimates of non-sampled trees.</li>
+</ul>
+</body>
+</html>

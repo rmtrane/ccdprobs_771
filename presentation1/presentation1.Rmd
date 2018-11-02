@@ -1,0 +1,166 @@
+---
+title: "Phylogenetic trees -- can we bootstrap?"
+author: "Ralph Møller Trane"
+date: "10/21/2018"
+output: 
+  beamer_presentation:
+    theme: "Copenhagen"
+    colortheme: "beaver"
+    slide_level: 2
+#classoption: "handout"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.height = 4, fig.width = 8)
+library(ggtree)
+library(ggplot2)
+library(Biostrings)
+library(dplyr)
+library(kableExtra)
+library(tidyr)
+library(stringr)
+```
+
+## Phylo-what trees...?
+
+Given a number of aligned DNA sequences, determine how they are related.
+
+Our toy example: cats and dogs!
+
+```{r results='asis'}
+
+cats_dogs_data <- readr::read_delim(file = "../cats-dogs-new/mrbayes_out/cats-dogs.nex", skip = 7, col_names = FALSE, delim = ';', n_max = 12) 
+
+cats_dogs_data %>% 
+  #filter(row_number() %in% c(1,2,5,7,8,12)) %>% 
+  separate(col = X1, sep = ' ', into = c('Taxa', 'Aligned DNA sequence'), extra = 'merge') %>% 
+  mutate(`Aligned DNA sequence` = str_trim(`Aligned DNA sequence`) %>% 
+           str_sub(end = 15) %>% 
+           paste0("...")) %>% 
+  knitr::kable() %>% 
+  kableExtra::kable_styling(font_size = 8)
+```
+
+
+## But why?
+
+>- To conserve phylogenetic diversity of plant communities^[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3440956/], which in turn could lead to feature diversity
+>- A certain natural product might have desired qualities, but come with unwanted side effects. 
+>- Phylogenetic trees can be related to transmission trees of infectious disease outbreaks^[https://www.ncbi.nlm.nih.gov/pubmed/24037268]
+>- Looking for new species
+>- Forensics; for example finding evidence that victims were infected by same strain of HIV^[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4072429/]
+
+## But how?
+
+>1) Based on the observed data, fit a model. 
+>2) Sample from the model. 
+>3) Results often represented using a single tree annotated with posterior probabilities of clades. 
+
+## Example - cats and dogs
+
+```{r}
+tree <- read.tree(text = "((((((gray_wolf,dog),coyote),dhole),racoon_dog),red_fox),(((tiger,(snow_leopard,leopard)),clouded_leopard),(cheetah,cat)));")
+
+probs <- tibble(edge = c(0,tree$edge[,2]),
+       prob = case_when(edge == 9 ~ 1,
+                        edge == 10 ~ 0.925952,
+                        edge == 12 ~ 0.76440,
+                        edge == 23 ~ 0.64942,
+                        edge == 11 ~ 0.80915,
+                        edge == 20 ~ 1,
+                        edge == 21 ~ 0.92857,
+                        edge == 7 ~ 0.99952,
+                        edge == 22 ~ 0.98995,
+                        edge == 8 ~ 1,
+                        TRUE ~ NA_real_) %>% 
+         sprintf(fmt = "%.4f") %>% 
+         (function(x = .){if_else(x == "NA", '', x)}),
+       clade_number = case_when(edge == 9 ~ "C_2",
+                                edge == 10 ~ "C_3",
+                                edge == 12 ~ "C_6",
+                                edge == 23 ~ "C_4",
+                                edge == 11 ~ "C_5",
+                                edge == 20 ~ "C_7",
+                                edge == 21 ~ "C_8",
+                                edge == 7 ~ "C_9",
+                                edge == 22 ~ "C_10",
+                                edge == 8 ~ "C_11",
+                                edge == 19 ~ "C_1", 
+                                TRUE ~ NA_character_)) 
+
+tree <- groupClade(tree, .node = c(23,19))
+
+
+plotted_tree <- ggtree(tree, branch.length = 'none',
+                       aes(color = group),
+                       right = F) + 
+  geom_tiplab(geom = 'text') + 
+  geom_nodelab(aes(label = probs$prob), hjust = 1.2, vjust = -0.25, color = 'black') +
+  geom_nodelab(aes(label = probs$clade_number), hjust = -0.1, vjust = -0.25, color = 'black') + 
+  scale_color_manual(values = c('red', 'blue')) +
+  xlim_tree(c(NA, 8))
+
+plotted_tree
+```
+
+---
+
+## So... what's the problem?
+
+>- The sample space is HUGE! 654,729,075 possible trees with only 12 taxa
+>- When doing inference, we consider the probability of a tree/subclades. 
+>    - Estimated using simple relative frequencies (SRF)
+>    - Unsampled tree $\implies$ estimated probability is 0. Reasonable?
+>- Using Conditional Clade Probabilities (CCD) we can estimate the probability of a tree based on subclades.
+
+
+## Conditional Clade Probabilities? 
+
+>- Given a split, further evolution in one subclade independent on the other
+>- Estimate probability of a tree using bayes and conditional independence
+
+---
+
+```{r}
+plotted_tree
+```
+
+## Conditional Clade Probabilities? 
+
+- Given a split, further evolution in one subclade independent on the other
+- Estimate probability of a tree using bayes and conditional independence
+
+>- SRF based vs CCD based probabilities
+>    - similar when we want them to be
+>    - CCDs non-zero for unsampled trees
+
+
+## Where are we going with this? 
+
+>- Don't need to directly estimate tree probabilities, can "simply" estimate CCD
+>- Maybe we can do this using bootstrap samples?
+>    - pro: much faster!
+>    - con: not as accurate
+>- Question: if it is less accurate, why bother?
+>    - Answer: actually works...
+>    - ... sometimes
+
+## Goal:
+
+>- Investigate when it works/doesn't work
+
+## Done so far: 
+
+>- Research. 
+>- Learned about phylogenetic trees
+>- Tools: MrBayes, Bistro, ccdprobs
+>- implemented method to read in a tree in Julia 
+
+## Plan of attack: 
+
+>- simulate trees in Julia
+>- use MrBayes/bistro and ccdprobs to get CCDs for bootstrap and MCMC samples
+>- compare
+>- ~~hopefully~~ find a pattern
+
+
