@@ -1,0 +1,45 @@
+#NEXUS
+[ID: 3922320106]
+begin taxa;
+	dimensions ntax=13;
+	taxlabels
+		camel_dromedary
+		dolphin
+		giant_sperm_whale
+		bowhead_whale
+		fin_whale
+		blue_whale
+		hippo
+		pig
+		cow
+		sheep
+		goat
+		giraffe
+		chevrotain
+		;
+end;
+begin trees;
+	translate
+		1	camel_dromedary,
+		2	dolphin,
+		3	giant_sperm_whale,
+		4	bowhead_whale,
+		5	fin_whale,
+		6	blue_whale,
+		7	hippo,
+		8	pig,
+		9	cow,
+		10	sheep,
+		11	goat,
+		12	giraffe,
+		13	chevrotain
+		;
+   [Note: This tree contains information on the topology, 
+          branch lengths (if present), and the probability
+          of the partition indicated by the branch.]
+   tree con_50_majrule = (1:1.459736e-01,7:1.029529e-01,((2:9.456920e-02,(3:1.014771e-01,(4:6.058834e-02,(5:3.641542e-02,6:4.140452e-02)1.000:2.491636e-02)1.000:1.843955e-02)0.998:1.746022e-02)1.000:4.208563e-02,(8:1.114613e-01,((9:7.961214e-02,((10:6.223674e-02,11:4.027866e-02)1.000:3.646234e-02,12:8.176118e-02)0.996:1.578305e-02)1.000:2.604759e-02,13:1.377319e-01)0.997:2.176053e-02)0.819:1.814856e-02)0.814:2.382763e-02);
+
+   [Note: This tree contains information only on the topology
+          and branch lengths (median of the posterior probability density).]
+   tree con_50_majrule = (1:1.459736e-01,7:1.029529e-01,((2:9.456920e-02,(3:1.014771e-01,(4:6.058834e-02,(5:3.641542e-02,6:4.140452e-02):2.491636e-02):1.843955e-02):1.746022e-02):4.208563e-02,(8:1.114613e-01,((9:7.961214e-02,((10:6.223674e-02,11:4.027866e-02):3.646234e-02,12:8.176118e-02):1.578305e-02):2.604759e-02,13:1.377319e-01):2.176053e-02):1.814856e-02):2.382763e-02);
+end;

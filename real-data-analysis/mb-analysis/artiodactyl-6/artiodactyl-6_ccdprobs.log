@@ -1,0 +1,12 @@
+ccdprobs version 1.0.5
+
+  produced at Sun Dec  2 22:13:37 2018
+
+Call: ../../../../ccdprobs/src/ccdprobs --out artiodactyl-6_ccdprobs --in artiodactyl-6_mbsum.out
+
+
+sample size = 420000 total trees.
+
+total   estimated probability = 0.99996658
+maximum estimated probability = 0.50587860
+minimum estimated probability = 0.00102134

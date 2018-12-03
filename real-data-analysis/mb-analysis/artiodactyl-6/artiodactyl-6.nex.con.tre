@@ -1,0 +1,31 @@
+#NEXUS
+[ID: 4149648310]
+begin taxa;
+	dimensions ntax=6;
+	taxlabels
+		Camel
+		Dolphin
+		Pig
+		Cow
+		Sheep
+		Giraffe
+		;
+end;
+begin trees;
+	translate
+		1	Camel,
+		2	Dolphin,
+		3	Pig,
+		4	Cow,
+		5	Sheep,
+		6	Giraffe
+		;
+   [Note: This tree contains information on the topology, 
+          branch lengths (if present), and the probability
+          of the partition indicated by the branch.]
+   tree con_50_majrule = (1:1.462135e-01,2:1.214105e-01,(3:1.072041e-01,(4:8.972918e-02,(5:8.602674e-02,6:7.649905e-02)0.521:1.849255e-02)1.000:5.143636e-02)0.968:2.780252e-02);
+
+   [Note: This tree contains information only on the topology
+          and branch lengths (median of the posterior probability density).]
+   tree con_50_majrule = (1:1.462135e-01,2:1.214105e-01,(3:1.072041e-01,(4:8.972918e-02,(5:8.602674e-02,6:7.649905e-02):1.849255e-02):5.143636e-02):2.780252e-02);
+end;

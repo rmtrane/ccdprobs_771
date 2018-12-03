@@ -1,0 +1,43 @@
+#NEXUS
+[ID: 3980504688]
+begin taxa;
+	dimensions ntax=12;
+	taxlabels
+		Felis_catus___domestic_cat
+		Acinonyx_jubatus___cheetah
+		Neofelis_nebulosa___clouded_leopard
+		Uncia_uncia___snow_leopard
+		Panthera_pardus___leopard
+		Panthera_tigris___tiger
+		Canis_lupus_familiaris___domestic_dog
+		Canis_lupus___gray_wolf
+		Canis_latrans___coyote
+		Cuon_alpinus___dhole
+		Vulpes_vulpes___red_fox
+		Nyctereutes_procyonoides___raccoon_dog
+		;
+end;
+begin trees;
+	translate
+		1	Felis_catus___domestic_cat,
+		2	Acinonyx_jubatus___cheetah,
+		3	Neofelis_nebulosa___clouded_leopard,
+		4	Uncia_uncia___snow_leopard,
+		5	Panthera_pardus___leopard,
+		6	Panthera_tigris___tiger,
+		7	Canis_lupus_familiaris___domestic_dog,
+		8	Canis_lupus___gray_wolf,
+		9	Canis_latrans___coyote,
+		10	Cuon_alpinus___dhole,
+		11	Vulpes_vulpes___red_fox,
+		12	Nyctereutes_procyonoides___raccoon_dog
+		;
+   [Note: This tree contains information on the topology, 
+          branch lengths (if present), and the probability
+          of the partition indicated by the branch.]
+   tree con_50_majrule = (1:4.806060e-02,(3:7.956038e-02,((4:3.986721e-02,5:3.727277e-02)1.000:1.867670e-02,6:5.929582e-02)0.948:1.693716e-02)1.000:4.072382e-02,(2:5.942367e-02,(((((7:2.835192e-03,8:2.520221e-03)1.000:2.817217e-02,9:1.546663e-02)1.000:3.005314e-02,10:5.170472e-02)1.000:5.621888e-02,12:9.638045e-02)0.977:2.792708e-02,11:7.301729e-02)1.000:1.320675e-01)0.827:2.673681e-02);
+
+   [Note: This tree contains information only on the topology
+          and branch lengths (median of the posterior probability density).]
+   tree con_50_majrule = (1:4.806060e-02,(3:7.956038e-02,((4:3.986721e-02,5:3.727277e-02):1.867670e-02,6:5.929582e-02):1.693716e-02):4.072382e-02,(2:5.942367e-02,(((((7:2.835192e-03,8:2.520221e-03):2.817217e-02,9:1.546663e-02):3.005314e-02,10:5.170472e-02):5.621888e-02,12:9.638045e-02):2.792708e-02,11:7.301729e-02):1.320675e-01):2.673681e-02);
+end;

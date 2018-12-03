@@ -1,0 +1,12 @@
+ccdprobs version 1.0.5
+
+  produced at Sun Dec  2 20:34:36 2018
+
+Call: /Users/ralphmoellertran/Documents/UW-Madison/ccdprobs/src/ccdprobs --out cats-dogs_ccdprobs --in cats-dogs_mbsum.out
+
+
+sample size = 420000 total trees.
+
+total   estimated probability = 0.99999905
+maximum estimated probability = 0.76564770
+minimum estimated probability = 0.00000192

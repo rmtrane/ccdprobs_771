@@ -1,0 +1,12 @@
+ccdprobs version 1.0.5
+
+  produced at Sun Dec  2 21:02:11 2018
+
+Call: /Users/ralphmoellertran/Documents/UW-Madison/ccdprobs/src/ccdprobs --out whales_ccdprobs --in whales_mbsum.out
+
+
+sample size = 420000 total trees.
+
+total   estimated probability = 0.99997712
+maximum estimated probability = 0.79980718
+minimum estimated probability = 0.00000112

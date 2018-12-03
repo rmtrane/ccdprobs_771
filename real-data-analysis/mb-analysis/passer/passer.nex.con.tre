@@ -1,0 +1,59 @@
+#NEXUS
+[ID: 3107418183]
+begin taxa;
+	dimensions ntax=20;
+	taxlabels
+		Loboparadisaea
+		sericea
+		Cnemophilus
+		loriae
+		Oedistoma
+		pygmaeum
+		Toxorhamphus
+		poliopterus
+		Coracina
+		atriceps
+		Melanocharis
+		versteri
+		Bombycilla
+		garrulus
+		Parus
+		major
+		Pericrocotus
+		cinnamomeus
+		Callaeas
+		cinerea
+		;
+end;
+begin trees;
+	translate
+		1	Loboparadisaea,
+		2	sericea,
+		3	Cnemophilus,
+		4	loriae,
+		5	Oedistoma,
+		6	pygmaeum,
+		7	Toxorhamphus,
+		8	poliopterus,
+		9	Coracina,
+		10	atriceps,
+		11	Melanocharis,
+		12	versteri,
+		13	Bombycilla,
+		14	garrulus,
+		15	Parus,
+		16	major,
+		17	Pericrocotus,
+		18	cinnamomeus,
+		19	Callaeas,
+		20	cinerea
+		;
+   [Note: This tree contains information on the topology, 
+          branch lengths (if present), and the probability
+          of the partition indicated by the branch.]
+   tree con_50_majrule = (1:1.282789e-03,2:9.242130e-03,(((3:3.206458e-02,4:2.125287e-02)0.565:3.343675e-03,6:2.088811e-02)0.968:7.096364e-03,(((5:2.174568e-02,9:3.715348e-02)1.000:1.122247e-02,(12:9.765520e-03,13:9.509416e-03)1.000:1.984396e-02,14:3.304352e-02)0.504:4.827558e-03,((11:4.004532e-02,17:3.487466e-02,18:3.501142e-02,19:2.177260e-02,20:2.260942e-02)1.000:1.733299e-02,(15:2.093669e-02,16:1.790503e-02)0.999:5.957262e-03)0.909:3.558470e-03)0.784:4.670289e-03,((7:5.906886e-02,8:3.953948e-02)0.941:7.801132e-03,10:3.740701e-02)0.595:2.521511e-03)1.000:4.246468e-02);
+
+   [Note: This tree contains information only on the topology
+          and branch lengths (median of the posterior probability density).]
+   tree con_50_majrule = (1:1.282789e-03,2:9.242130e-03,(((3:3.206458e-02,4:2.125287e-02):3.343675e-03,6:2.088811e-02):7.096364e-03,(((5:2.174568e-02,9:3.715348e-02):1.122247e-02,(12:9.765520e-03,13:9.509416e-03):1.984396e-02,14:3.304352e-02):4.827558e-03,((11:4.004532e-02,17:3.487466e-02,18:3.501142e-02,19:2.177260e-02,20:2.260942e-02):1.733299e-02,(15:2.093669e-02,16:1.790503e-02):5.957262e-03):3.558470e-03):4.670289e-03,((7:5.906886e-02,8:3.953948e-02):7.801132e-03,10:3.740701e-02):2.521511e-03):4.246468e-02);
+end;

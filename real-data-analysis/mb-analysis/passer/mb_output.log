@@ -1,0 +1,212 @@
+
+
+                            MrBayes pre-3.2.7 x86_64
+
+                      (Bayesian Analysis of Phylogeny)
+
+              Distributed under the GNU General Public License
+
+
+               Type "help" or "help <command>" for information
+                     on the commands that are available.
+
+                   Type "about" for authorship and general
+                       information about the program.
+
+
+
+   Executing file "passer.nex"
+   UNIX line termination
+   Longest line length = 736
+   Parsing file
+   Expecting NEXUS formatted file
+   Reading taxa block
+      Allocated taxon set
+      Defining new set of 20 taxa
+   Exiting taxa block
+   Reading characters block
+      Allocated matrix
+      Defining new character matrix with 710 characters
+      Data is Dna
+      Gaps coded as -
+      Taxon  1 -> Loboparadisaea_sericea
+      Taxon  2 -> Cnemophilus_loriae
+      Taxon  3 -> Oedistoma_pygmaeum
+      Taxon  4 -> Toxorhamphus_poliopterus
+      Taxon  5 -> Coracina_atriceps
+      Taxon  6 -> Melanocharis_versteri
+      Taxon  7 -> Bombycilla_garrulus
+      Taxon  8 -> Parus_major
+      Taxon  9 -> Pericrocotus_cinnamomeus
+      Taxon 10 -> Callaeas_cinerea
+      Taxon 11 -> Monarcha_melanopsis
+      Taxon 12 -> Hylophilus_ochraceiceps
+      Taxon 13 -> Vireo_olivaceus
+      Taxon 14 -> Oriolus_xanthornus
+      Taxon 15 -> Gymnorhina_tibicen
+      Taxon 16 -> Batis_poensis
+      Taxon 17 -> Rhipidura_rufifrons
+      Taxon 18 -> Lanius_collaris
+      Taxon 19 -> Dicrurus_bracteatus
+      Taxon 20 -> Corvus_corone
+      Successfully read matrix
+      Setting default partition (does not divide up characters)
+      Setting model defaults
+      Seed (for generating default start values) = 1543855930
+      Setting output file names to "passer.nex.run<i>.<p|t>"
+   Exiting characters block
+   Reading mrbayes block
+      Setting autoclose to yes
+      Setting nowarnings to yes
+      Setting Nst to 6
+      Successfully set likelihood model parameters
+      Setting outgroup to taxon "Loboparadisaea"
+      Setting Brlenspr to Unconstrained:Exponential(10.00)
+      Successfully set prior model parameters
+      Setting number of generations to 1100000
+      Setting print frequency to 10000
+      Setting sample frequency to 1
+      Running Markov chain
+      MCMC stamp = 7249727831
+      Seed = 2115771922
+      Swapseed = 1543855930
+      Model settings:
+
+         Data not partitioned --
+            Datatype  = DNA
+            Nucmodel  = 4by4
+            Nst       = 6
+                        Substitution rates, expressed as proportions
+                        of the rate sum, have a Dirichlet prior
+                        (1.00,1.00,1.00,1.00,1.00,1.00)
+            Covarion  = No
+            # States  = 4
+                        State frequencies have a Dirichlet prior
+                        (1.00,1.00,1.00,1.00)
+            Rates     = Equal
+
+      Active parameters: 
+
+         Parameters
+         ---------------------
+         Revmat              1
+         Statefreq           2
+         Ratemultiplier      3
+         Topology            4
+         Brlens              5
+         ---------------------
+
+         1 --  Parameter  = Revmat
+               Type       = Rates of reversible rate matrix
+               Prior      = Dirichlet(1.00,1.00,1.00,1.00,1.00,1.00)
+
+         2 --  Parameter  = Pi
+               Type       = Stationary state frequencies
+               Prior      = Dirichlet
+
+         3 --  Parameter  = Ratemultiplier
+               Type       = Partition-specific rate multiplier
+               Prior      = Fixed(1.0)
+
+         4 --  Parameter  = Tau
+               Type       = Topology
+               Prior      = All topologies equally probable a priori
+               Subparam.  = V
+
+         5 --  Parameter  = V
+               Type       = Branch lengths
+               Prior      = Unconstrained:Exponential(10.0)
+
+
+
+      The MCMC sampler will use the following moves:
+         With prob.  Chain will use move
+            0.96 %   Dirichlet(Revmat)
+            0.96 %   Slider(Revmat)
+            0.96 %   Dirichlet(Pi)
+            0.96 %   Slider(Pi)
+            9.62 %   ExtSPR(Tau,V)
+            9.62 %   ExtTBR(Tau,V)
+            9.62 %   NNI(Tau,V)
+            9.62 %   ParsSPR(Tau,V)
+           38.46 %   Multiplier(V)
+           13.46 %   Nodeslider(V)
+            5.77 %   TLMultiplier(V)
+
+      Division 1 has 295 unique site patterns
+      Initializing conditional likelihoods
+      Using standard FMA likelihood calculator for division 1 (single-precision)
+
+      Initial log likelihoods and log prior probs for run 1:
+         Chain 1 -- -3751.405844 -- 37.527300
+         Chain 2 -- -3661.221647 -- 37.527300
+         Chain 3 -- -3730.960112 -- 37.527300
+         Chain 4 -- -3749.238411 -- 37.527300
+
+      Initial log likelihoods and log prior probs for run 2:
+         Chain 1 -- -3669.705901 -- 37.527300
+         Chain 2 -- -3698.955110 -- 37.527300
+         Chain 3 -- -3706.460401 -- 37.527300
+         Chain 4 -- -3725.627872 -- 37.527300
+
+      Overwriting file "passer.nex.mcmc"
+      Overwriting file "passer.nex.run1.p"
+      Overwriting file "passer.nex.run1.t"
+      Overwriting file "passer.nex.run2.p"
+      Overwriting file "passer.nex.run2.t"
+
+      Using a relative burnin of 25.0 % for diagnostics
+
+      Chain results (1100000 generations requested):
+
+          0 -- [-3751.406] (-3661.222) (-3730.960) (-3749.238) * [-3669.706] (-3698.955) (-3706.460) (-3725.628) 
+
+   Ctrl-C detected
+   Do you really want to stop the run (y/n)?
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+
+   Ctrl-C detected
+   Mcmc run continued ...
+
+   Do you really want to stop the run (y/n)?
+   Ctrl-C detected
+Error in function: ConfirmAbortRun at line: 15385 in file: mcmc.c   Mcmc run continued ...
+
+   Do you really want to stop the run (y/n)?Error in function: ConfirmAbortRun at line: 15385 in file: mcmc.c   Mcmc run continued ...
+

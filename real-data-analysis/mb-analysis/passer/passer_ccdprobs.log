@@ -1,0 +1,12 @@
+ccdprobs version 1.0.5
+
+  produced at Sun Dec  2 20:55:23 2018
+
+Call: /Users/ralphmoellertran/Documents/UW-Madison/ccdprobs/src/ccdprobs --out passer_ccdprobs --in passer_mbsum.out
+
+
+sample size = 24000 total trees.
+
+total   estimated probability = 0.67937024
+maximum estimated probability = 0.00364672
+minimum estimated probability = 0.00000000
